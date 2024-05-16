@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import styled from '@emotion/styled';
+import axios from 'axios';
+import { userAgent } from 'next/server';
 
 const PostContainer = styled.div(() => ({
   width: '300px',
-  margin: '10px',
+  margin: '0px 12px 12px 12px',
   border: '1px solid #ccc',
   borderRadius: '5px',
   overflow: 'hidden',
@@ -46,7 +48,7 @@ const Content = styled.div(() => ({
 
 const Button = styled.button(() => ({
   position: 'absolute',
-  bottom: 0,
+  top: '50%',
   backgroundColor: 'rgba(255, 255, 255, 0.5)',
   border: 'none',
   color: '#000',
@@ -63,22 +65,21 @@ const NextButton = styled(Button)`
   right: 10px;
 `;
 
-const Post = ({ post }) => {
+const Post = ({ post, users }) => {
   const carouselRef = useRef(null);
-
   const handleNextClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: 50,
+        left: 300,
         behavior: 'smooth',
       });
     }
   };
-
+  
   const handlePrevClick = () => {
     if (carouselRef.current) {
       carouselRef.current.scrollBy({
-        left: -70,
+        left: -300,
         behavior: 'smooth',
       });
     }
